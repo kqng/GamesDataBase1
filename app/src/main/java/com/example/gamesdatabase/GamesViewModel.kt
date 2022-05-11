@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import androidx.palette.graphics.Palette
 
 class GamesViewModel constructor(private val getGamesUseCase: GetGamesUseCase) : ViewModel() {
 
@@ -45,5 +46,6 @@ class GamesViewModel constructor(private val getGamesUseCase: GetGamesUseCase) :
             palette?.dominantSwatch?.let {
                 onGenerated(it)
             }
-        }*/
+        }
+    }*/
 }
