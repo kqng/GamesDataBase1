@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.gamesdatabase.Repository.GamesRepository
 import com.example.gamesdatabase.models.Game
 import com.example.gamesdatabase.models.GamesResponse
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.*
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -42,7 +43,7 @@ class GameFragment: Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setData()
+        setData()//
     }
     private class GameHolder(private val gameItemView: View) : RecyclerView.ViewHolder(gameItemView){
         val gameImage: ImageView = gameItemView.findViewById(R.id.imageView)
@@ -62,9 +63,19 @@ class GameFragment: Fragment() {
 
         override fun onBindViewHolder(holder: GameHolder, position: Int) { //сюда данные для вывода
             val gameItem = gameItems?.get(position)
-            val placeholder: Drawable = ContextCompat.getDrawable(
-                requireContext(),R.drawable.no_img) ?: ColorDrawable()
-            holder.bindDrawable(placeholder)
+            val imageView = holder.gameImage
+            //if (gameItem != null) {
+                Picasso.get()
+                    .load(Constants.url)//gameItem.background_image)
+                    .resize(1000, 500)
+                    .centerCrop()
+                    .into(imageView)
+            //}
+            /*val placeholder: Drawable = ContextCompat.getDrawable(
+                requireContext(),
+                //R.drawable.no_img
+            ) ?: ColorDrawable()
+            holder.bindDrawable(placeholder)*/
             gameItem?.name?.let { holder.bindTitle(it) }
             //?
         }
