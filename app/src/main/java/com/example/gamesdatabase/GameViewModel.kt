@@ -33,16 +33,5 @@ class GameViewModel constructor(private val getGameDetailsUseCase: GetGameDetail
             }
         }
     }
-    /*fun getImageDominantSwatch(drawable: Drawable, onGenerated: (Palette.Swatch) -> Unit) {
-        val bitmap = (drawable as BitmapDrawable).bitmap.copy(Bitmap.Config.ARGB_8888, true)
-        Palette.from(bitmap).generate { palette ->
-            palette?.dominantSwatch?.let {
-                onGenerated(it)
-            }
-        }
-    }*/
-    /*val gameItemLiveData: LiveData<List<GameItem>>
-    init {
-        gameItemLiveData = GameReceive().receiveGames()
-    }*/
+
 }

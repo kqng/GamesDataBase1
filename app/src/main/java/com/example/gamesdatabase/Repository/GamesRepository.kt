@@ -1,5 +1,6 @@
 package com.example.gamesdatabase.Repository
 
+import androidx.lifecycle.LiveData
 import com.example.gamesdatabase.models.GamesResponse
 
 interface GamesRepository {

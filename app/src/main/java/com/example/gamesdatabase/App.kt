@@ -13,7 +13,7 @@ class App : Application() {
     private fun initKoin() {
         val modules = listOf(domainModule,networkModule,repositoryModule,presentationModule)
         startKoin {
-            androidLogger()
+            //androidLogger()
             androidContext(this@App)
             modules(modules)
         }

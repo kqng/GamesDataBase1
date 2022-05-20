@@ -3,24 +3,44 @@ package com.example.gamesdatabase
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.snapshotFlow
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import androidx.palette.graphics.Palette
+import com.example.gamesdatabase.models.GamesResponse
+import kotlinx.coroutines.*
 
 class GamesViewModel constructor(private val getGamesUseCase: GetGamesUseCase) : ViewModel() {
+//переделаь в LiveData
+    val getGames: LiveData<GamesResponse>
+    var gamesResponse: MutableLiveData<GamesResponse> = MutableLiveData()
+    //private val repositoryImpl: GamesRepositoryImpl
+    init {
+       // var job: Job? = null
+        //job =
+            GlobalScope.launch{
+                gamesResponse.postValue(getGamesUseCase.invoke(ordering = "relevance", page = 1, perPage = 5))
+            }
+        //job?.join()
 
-    private val _state = mutableStateOf(GamesListState())
-    val state: State<GamesListState> = _state
+        getGames = gamesResponse
+        //getGames =dsf
+    }
+   /* private val _state = mutableStateOf(GamesListState())
+    val state: MutableState<GamesListState> = _state
 
     init {
         getGames()
     }
 
-    private fun getGames() {
+    private fun getGames(){
         val gamesResponse = getGamesUseCase.invoke(ordering = "relevance", page = 1, perPage = 5)
         gamesResponse.onEach { result ->
             when (result) {
@@ -38,14 +58,6 @@ class GamesViewModel constructor(private val getGamesUseCase: GetGamesUseCase) :
                 }
             }
         }.launchIn(viewModelScope)
-    }
-
-    /*fun getImageDominantSwatch(drawable: Drawable, onGenerated: (Palette.Swatch) -> Unit) {
-        val bitmap = (drawable as BitmapDrawable).bitmap.copy(Bitmap.Config.ARGB_8888, true)
-        Palette.from(bitmap).generate { palette ->
-            palette?.dominantSwatch?.let {
-                onGenerated(it)
-            }
-        }
     }*/
+
 }

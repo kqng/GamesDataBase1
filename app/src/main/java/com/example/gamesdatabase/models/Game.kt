@@ -1,5 +1,8 @@
 package com.example.gamesdatabase.models
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Game(
     val added: Int?,
     val background_image: String?,
@@ -22,4 +25,4 @@ data class Game(
     val suggestions_count: Int?,
     val tba: Boolean?,
     val updated: String?
-)
+) : Parcelable
